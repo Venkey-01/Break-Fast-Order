@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menu Items</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-image: url('image.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .container {
+      max-width: 1100px;
+      width: 100%;
+      margin: 40px auto;
+      background: rgba(255,255,255,0.95);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(44, 62, 80, 0.15);
+      padding: 40px 30px 30px 30px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.8rem;
+      color: #2e7d32;
+      margin-bottom: 35px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      text-shadow: 0 2px 8px #c8e6c9;
+    }
+    .menu-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    .menu-item {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 16px rgba(46, 125, 50, 0.10);
+      width: 300px;
+      padding: 24px 18px 18px 18px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .menu-item:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 8px 32px rgba(46, 125, 50, 0.18);
+    }
+    .menu-item img {
+      border-radius: 14px;
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 8px rgba(44, 62, 80, 0.10);
+    }
+    .menu-item h2 {
+      margin: 8px 0 4px;
+      font-size: 1.5rem;
+      color: #388e3c;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .price {
+      color: #1b5e20;
+      font-weight: bold;
+      margin-bottom: 12px;
+      font-size: 1.1rem;
+    }
+    .quantity-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .quantity-controls button {
+      background: linear-gradient(90deg, #43ea7c 0%, #2e7d32 100%);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 16px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(46, 125, 50, 0.10);
+      transition: background 0.2s;
+    }
+    .quantity-controls button:hover {
+      background: linear-gradient(90deg, #2e7d32 0%, #43ea7c 100%);
+    }
+    .quantity {
+      min-width: 24px;
+      font-weight: bold;
+      color: #222;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+    .add-to-cart-btn {
+      background: linear-gradient(90deg, #2e7d32 0%, #43ea7c 100%);
+      color: white;
+      border: none;
+      padding: 10px 28px;
+      border-radius: 25px;
+      font-size: 1.08rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 8px;
+      box-shadow: 0 2px 8px rgba(46, 125, 50, 0.10);
+      transition: background 0.2s;
+    }
+    .add-to-cart-btn:hover {
+      background: linear-gradient(90deg, #43ea7c 0%, #2e7d32 100%);
+    }
+    .status-btn {
+      margin-top: 30px;
+      background: #388e3c;
+      color: #fff;
+      border: none;
+      padding: 10px 32px;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(46, 125, 50, 0.10);
+      transition: background 0.2s;
+    }
+    .status-btn:hover {
+      background: #1b5e20;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Menu Items</h1>
+    <div class="menu-list">
+      <div class="menu-item" data-id="idli" data-price="40">
+        <img src="idli.png" alt="Idli dish" />
+        <h2>Idli</h2>
+        <div class="price">₹40 per plate</div>
+        <div class="quantity-controls">
+          <button onclick="changeQuantity(this, -1)">−</button>
+          <span class="quantity">0</span>
+          <button onclick="changeQuantity(this, 1)">+</button>
+        </div>
+        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+      </div>
+      <div class="menu-item" data-id="dosa" data-price="60">
+        <img src="dosa.png" alt="Dosa dish" />
+        <h2>Dosa</h2>
+        <div class="price">₹60 per plate</div>
+        <div class="quantity-controls">
+          <button onclick="changeQuantity(this, -1)">−</button>
+          <span class="quantity">0</span>
+          <button onclick="changeQuantity(this, 1)">+</button>
+        </div>
+        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+      </div>
+      <div class="menu-item" data-id="vada" data-price="50">
+        <img src="vada.png" alt="Vada dish" />
+        <h2>Vada</h2>
+        <div class="price">₹50 per plate</div>
+        <div class="quantity-controls">
+          <button onclick="changeQuantity(this, -1)">−</button>
+          <span class="quantity">0</span>
+          <button onclick="changeQuantity(this, 1)">+</button>
+        </div>
+        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+      </div>
+    </div>
+    <button class="status-btn" onclick="window.location.href='status.html?name=' + encodeURIComponent(localStorage.getItem('name'))">View Order Status</button>
+  </div>
+  <script>
+    if (localStorage.getItem('role') !== 'user') {
+      alert('Access denied. Only users can order.');
+      window.location.href = 'index.html';
+    }
+    function changeQuantity(button, delta) {
+      const quantityEl = button.parentElement.querySelector('.quantity');
+      let current = parseInt(quantityEl.textContent);
+      current = Math.max(0, current + delta);
+      quantityEl.textContent = current;
+    }
+    function addToCart(button) {
+      const item = button.closest('.menu-item');
+      const name = item.querySelector('h2').textContent;
+      const quantity = parseInt(item.querySelector('.quantity').textContent);
+      const price = parseInt(item.dataset.price);
+      if (quantity === 0) {
+        alert("Please select quantity.");
+        return;
+      }
+      const total = price * quantity;
+      const userName = localStorage.getItem('name') || 'Guest';
+      fetch('http://localhost:5000/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: userName,
+          item: name,
+          quantity: quantity,
+          price: total
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert(`Added ${quantity} plate(s) of ${name} to cart. Total: ₹${total}`);
+      })
+      .catch(err => {
+        alert('Failed to place order. Try again later.');
+      });
+      item.querySelector('.quantity').textContent = 0;
+    }
+  </script>
+</body>
+</html>
