@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Order Status</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-image: url('image.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .container {
+      max-width: 700px;
+      width: 100%;
+      margin: 40px auto;
+      background: rgba(255,255,255,0.97);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(44, 62, 80, 0.15);
+      padding: 40px 30px 30px 30px;
+      text-align: center;
+    }
+    h2 {
+      font-size: 2.2rem;
+      color: #2e7d32;
+      margin-bottom: 30px;
+      font-weight: 700;
+      text-shadow: 0 2px 8px #c8e6c9;
+    }
+    .order-list {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .order-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(46, 125, 50, 0.10);
+      width: 90%;
+      max-width: 500px;
+      padding: 22px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      border-left: 8px solid #43ea7c;
+      transition: box-shadow 0.2s;
+    }
+    .order-card:hover {
+      box-shadow: 0 8px 32px rgba(46, 125, 50, 0.18);
+    }
+    .order-item {
+      font-size: 1.2rem;
+      color: #388e3c;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .order-qty {
+      font-size: 1.05rem;
+      color: #222;
+      margin-bottom: 6px;
+    }
+    .order-status {
+      font-size: 1.08rem;
+      font-weight: 600;
+      padding: 6px 18px;
+      border-radius: 12px;
+      background: #e0f2f1;
+      color: #00796b;
+      display: inline-block;
+      margin-top: 8px;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 8px rgba(44, 62, 80, 0.10);
+    }
+    .order-status[data-status="Pending"] {
+      background: #fff3e0;
+      color: #f57c00;
+    }
+    .order-status[data-status="Preparing"] {
+      background: #fffde7;
+      color: #fbc02d;
+    }
+    .order-status[data-status="Ready"] {
+      background: #e8f5e9;
+      color: #388e3c;
+    }
+    .order-status[data-status="Delivered"] {
+      background: #e3f2fd;
+      color: #1976d2;
+    }
+    .back-btn {
+      margin-top: 20px;
+      background: #388e3c;
+      color: #fff;
+      border: none;
+      padding: 10px 32px;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(46, 125, 50, 0.10);
+      transition: background 0.2s;
+    }
+    .back-btn:hover {
+      background: #1b5e20;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Your Order Status</h2>
+    <div class="order-list" id="orderList"></div>
+    <button class="back-btn" onclick="window.location.href='menu.html'">Back to Menu</button>
+  </div>
+  <script>
+    if (localStorage.getItem('role') !== 'user') {
+      alert('Access denied.');
+      window.location.href = 'index.html';
+    }
+    const userName = localStorage.getItem('name');
+    fetch('http://localhost:5000/api/orders?name=' + userName)
+    .then(res => res.json())
+    .then(data => {
+      const list = document.getElementById('orderList');
+      if (!data.orders || data.orders.length === 0) {
+        list.innerHTML = '<div style="color:#888;font-size:1.1rem;">No orders found.</div>';
+        return;
+      }
+      data.orders.forEach(order => {
+        const card = document.createElement('div');
+        card.className = 'order-card';
+        card.innerHTML = `
+          <div class="order-item">${order.item}</div>
+          <div class="order-qty">Quantity: <b>${order.quantity}</b></div>
+          <div class="order-status" data-status="${order.status}">Status: ${order.status}</div>
+        `;
+        list.appendChild(card);
+      });
+    });
+  </script>
+</body>
+</html>
