@@ -206,7 +206,7 @@
       }
       const total = price * quantity;
       const userName = localStorage.getItem('name') || 'Guest';
-      fetch('http://localhost:5000/api/orders', {
+      fetch('https://break-fast-backend.onrender.com/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

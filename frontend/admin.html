@@ -164,7 +164,7 @@
       alert('Access denied.');
       window.location.href = 'index.html';
     }
-    fetch('http://localhost:5000/api/orders')
+    fetch('https://break-fast-backend.onrender.com/api/orders')
     .then(res => res.json())
     .then(data => {
       const list = document.getElementById('adminOrderList');
@@ -193,7 +193,7 @@
     });
 
     function updateStatus(orderId, status) {
-      fetch('http://localhost:5000/api/orders/' + orderId, {
+      fetch('https://break-fast-backend.onrender.com/api/orders/' + orderId, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status })
