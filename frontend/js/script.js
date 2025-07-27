@@ -18,7 +18,7 @@ function loginUser() {
     alert('Please enter both name and mobile.');
     return;
   }
-  fetch('http://localhost:5000/api/auth/login', {
+  fetch('https://break-fast-backend.onrender.com/api/auth/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name, mobile, role })
@@ -62,7 +62,7 @@ function signupUser() {
     alert('Please enter both name and mobile.');
     return;
   }
-  fetch('http://localhost:5000/api/auth/signup', {
+  fetch('https://break-fast-backend.onrender.com/api/auth/signup', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name, mobile, role })
